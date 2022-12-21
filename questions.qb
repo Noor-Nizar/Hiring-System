@@ -1,0 +1,9 @@
+# hr_expert_system/questions.qb
+
+# Define the questions for gathering applicant information
+applicant_name()
+applicant_degree()
+applicant_work_experience()
+applicant_skills()
+applicant_values_align_with_company()
+applicant_good_communication_skills()

@@ -1,0 +1,166 @@
+no_degree
+    use noDegree()
+    when 
+        not tech_degree($_any)
+        not non_tech_degree($_any)
+
+is_SelfLearner_Tech
+    use SelfLearnerTech($major,$years)
+    when
+        no_degree()
+        tech_cert($_any, $_any)
+        tech_experience($major, $years > 2)
+is_SelfLearner_business
+    use SelfLearnerBusiness($major,$years)
+        no_degree()
+        business_cert($_any, $_any)
+        business_experience($major, $years > 2) 
+
+is_Qualified_For_Tech_SL
+    use QualifiedForTech($major,$years)
+    
+    when
+        SelfLearnerTech()
+        
+is_Qualified_For_Tech
+    use QualifiedForTech(Person.Experience)
+    when
+        tech_degree($_any)
+        
+is_Qualified_For_Business
+    use QualifiedForBuisness(Person.Experience)
+    when
+        business_degree($_any)
+
+is_Qualified_For_Business_SL
+    use QualifiedForBuisness($major, $years-2 )
+    when
+        SelfLearnerBusiness($major, $years )
+is_Qualified_for_SE
+    use QualifiedForSE(T)
+    when
+        QualifiedForTech($_any)
+        tech_cert(SE, $_any)
+
+is_Qualified_for_SEIntern
+    use SoftwareEngineerIntern(T)
+    when
+        QualifiedForTech($_any < 2)
+        QualifiedForSE(T)
+        
+is_Qualified_For_SEJunior
+    use SoftwareEngineerJunior(T)
+    when
+        QualifiedForTech($_any >= 2)
+        QualifiedForTech($_any < 5)
+        QualifiedForSE(T)
+
+is_Qualified_for_SESenior
+    use SoftwareEngineerSenior(T)
+    when
+        QualifiedForTech($_any >= 5)
+        QualifiedForSE(T)
+
+is_Qualified_for_DS
+    use QualifiedForDS(T)
+    when
+        QualifiedForTech($_any)
+        tech_cert(DS, $_any)
+
+is_Qualified_for_DSIntern
+    use DataScientistIntern(T)
+    when
+        QualifiedForTech($_any < 2)
+        QualifiedForDS(T)
+
+is_Qualified_for_DSJunior
+    use DataScientistJunior(T)
+    when
+        QualifiedForTech($_any >= 2)
+        QualifiedForTech($_any < 5)
+        QualifiedForDS(T)
+
+is_Qualified_for_DSSenior
+    use DataScientistSenior(T)
+    when
+        QualifiedForTech($_any >= 5)
+        QualifiedForDS(T)
+
+is_Qualified_for_IT
+    use QualifiedForIT(Persons.Experience)
+    when
+        QualifiedForTech($_any)
+        tech_cert(IT, $_any)
+
+is_Qualified_for_ITIntern
+    use ITIntern(T)
+    when
+        QualifiedForTech($_any < 2)
+        QualifiedForIT(T)
+
+is_Qualified_for_ITJunior
+    use ITJunior(T)
+    when
+        QualifiedForTech($_any >= 2)
+        QualifiedForTech($_any < 5)
+        QualifiedForIT(T)
+
+is_Qualified_for_ITSenior
+    use ITSenior(T)
+    when
+        QualifiedForTech($_any >= 5)
+        QualifiedForIT(T)
+
+is_Qualified_for_CyberSecurity
+    use QualifiedForCyberSecurity(Persons.Experience)
+    when
+        QualifiedForTech($_any)
+        tech_cert(CyberSecurity, $_any)
+
+is_Qualified_for_CyberSecurityIntern
+    use CyberSecurityIntern(T)
+    when
+        QualifiedForTech($_any < 2)
+        QualifiedForCyberSecurity(T)
+
+is_Qualified_for_CyberSecurityJunior
+    use CyberSecurityJunior(T)
+    when
+        QualifiedForTech($_any >= 2)
+        QualifiedForTech($_any < 5)
+        QualifiedForCyberSecurity(T)
+
+is_Qualified_for_CyberSecuritySenior
+    use CyberSecuritySenior(T)
+    when
+        QualifiedForTech($_any >= 5)
+        QualifiedForCyberSecurity(T)
+
+is_Qualified_for_Security
+    use  QualifiedForsecurity()
+    when
+        gender(male)
+        
+is_Qualified_for_Service
+    use  QualifiedForservice()
+    when
+        gender(female)
+
+is_Qualified_for_receptionest
+    use  QualifiedForreceptionest()
+    when
+        non_tech_cert(Languages, $_any)
+
+is_Qualified_for_Sales
+    use SalesPerson(T)
+    when
+        QualifiedForBuisness($_any )
+        business_cert(Sales,$_any)
+        business_experience(Sales,$_any > 2)
+
+is_Qualified_For_Accounting
+    use QualifiedForAccounting(Persons.Experience)
+    when
+        QualifiedForBuisness($_any)
+        business_cert(Accouning,$_any)
+        business_experience(Accouning,$_any)

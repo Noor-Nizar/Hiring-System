@@ -1,0 +1,3 @@
+tech_degrees('CS')
+tech_cert('CS', 'Certified Ethical Hacker')
+tech_experience('CS',1)

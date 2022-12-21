@@ -1,0 +1,151 @@
+no_degree
+    foreach
+        tech_degree($_any)
+        non_tech_degree($_any)
+    assert noDegree()
+    
+is_Qualified_For_Tech_SL
+    foreach
+        no_degree()
+        tech_cert($_any, $_any)
+        tech_experience($field, $years > 2)
+    assert QualifiedForTech($field, $years-2)
+    
+    
+is_Qualified_For_Tech
+    foreach
+        tech_degree($_any)
+        tech_experience($field,$years)
+    assert QualifiedForTech($field,$years)
+    
+
+is_Qualified_for_SEIntern
+    foreach
+        QualifiedForTech(SE,$_any < 2)
+        tech_cert(SE, $_any)
+    assert SEIntern(T)
+    
+is_Qualified_For_SEJunior
+    foreach
+        QualifiedForTech(SE,$_any >= 2)
+        QualifiedForTech(SE,$_any < 5)
+        tech_cert(SE, $_any)
+    assert SEJunior(T)
+    
+
+is_Qualified_for_SESenior
+    foreach
+        QualifiedForTech(SE,$_any >= 5)
+        tech_cert(SE, $_any)
+    assert SESenior(T)
+       
+
+is_Qualified_for_DSIntern
+    foreach
+        QualifiedForTech(DS,$_any < 2)
+        tech_cert(DS, $_any)
+    assert DSIntern(T)
+    
+
+is_Qualified_for_DSJunior
+    foreach
+        QualifiedForTech(DS,$_any >= 2)
+        QualifiedForTech(DS,$_any < 5)
+        tech_cert(DS, $_any)
+    assert DSJunior(T)
+    
+
+is_Qualified_for_DSSenior
+    foreach
+        QualifiedForTech(DS,$_any >= 5)
+        tech_cert(DS, $_any)
+    assert DSSenior(T)
+    
+is_Qualified_for_ITIntern
+    foreach
+        QualifiedForTech(IT,$_any < 2)
+        tech_cert(IT, $_any)
+    assert ITIntern(T)
+    
+
+is_Qualified_for_ITJunior
+    foreach
+        QualifiedForTech(IT,$_any >= 2)
+        QualifiedForTech(IT,$_any < 5)
+        tech_cert(IT, $_any)
+    assert ITJunior(T)
+    
+
+is_Qualified_for_ITSenior
+    foreach
+        QualifiedForTech(IT,$_any >= 5)
+        tech_cert(IT, $_any)
+    assert ITSenior(T)
+    
+
+is_Qualified_for_CSIntern
+    foreach
+        QualifiedForTech(CS,$_any < 2)
+        tech_cert(CS, $_any)
+    assert CSIntern(T)
+    
+
+is_Qualified_for_CSJunior
+    foreach
+        QualifiedForTech(CS,$_any >= 2)
+        QualifiedForTech($_any < 5)
+        tech_cert(CS, $_any)
+    assert CSJunior(T)
+    
+
+is_Qualified_for_CSSenior
+    foreach
+        QualifiedForTech(CS,$_any >= 5)
+        tech_cert(CS, $_any)
+    assert CSSenior(T)
+    
+
+is_Qualified_for_Security
+    foreach
+        gender(male)
+    assert  QualifiedForsecurity()
+    
+        
+is_Qualified_for_Service
+    foreach
+        gender(female)
+    assert  QualifiedForservice()
+    
+
+is_Qualified_for_receptionest
+    foreach
+        non_tech_cert(Languages, $_any)
+    assert  QualifiedForreceptionest()
+
+
+
+is_Qualified_For_Business
+    foreach
+        business_degree($_any)
+        business_experience($field,$years)
+    assert QualifiedForBuisness($field,$years)
+    
+is_Qualified_For_Business_SL
+    foreach
+        no_degree()
+        business_cert($_any, $_any)
+        business_experience($field, $years > 2)
+    assert QualifiedForBuisness($field, $years-2 )
+    
+
+is_Qualified_for_Sales
+    foreach
+        QualifiedForBuisness(Sales,$_any)
+    assert SalesPerson(T)
+    
+
+is_Qualified_For_Accounting
+    foreach
+        QualifiedForBuisness(Accounting,$_any)
+    assert Accountant(T)
+    

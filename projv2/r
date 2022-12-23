@@ -1,0 +1,2 @@
+python driver.py
+rm -rf compiled_krb

@@ -1,0 +1,180 @@
+is_no_degree
+    use no_degree(T)
+    when
+        qb.tech_degree($_any)
+        qb.non_tech_degree($_any)
+          
+is_Qualified_For_Tech_SL
+    use QualifiedForTech($field, $eyears)
+    when
+        qb.no_degree()
+        qb.tech_cert($_any, $_any)
+        qb.tech_experience($field, $years)
+        check $years > 2
+        $eyears = years-2
+    
+    
+    
+is_Qualified_For_Tech
+    use QualifiedForTech($field,$years)
+    when
+        qb.tech_degree($_any)
+        qb.tech_experience($field,$years)
+    
+    
+
+is_Qualified_for_SEIntern
+    use QualifiedForJob('Software Engineer Intern')
+    when
+        qb.QualifiedForTech(SE,$y)
+        check $y < 2
+        qb.tech_cert(SE, $_any)
+    
+    
+is_Qualified_For_SEJunior
+    use QualifiedForJob('Software Engineer Junior')
+    when
+        qb.QualifiedForTech(SE,$y )
+        check $y >= 2
+        qb.QualifiedForTech(SE,$ys )
+        check $ys < 5
+        qb.tech_cert(SE, $_any)
+    
+    
+
+is_Qualified_for_SESenior
+    use QualifiedForJob('Software Engineer Senior')
+    when
+        qb.QualifiedForTech(SE,$y)
+        check $y >= 5
+        qb.tech_cert(SE, $_any)
+    
+       
+
+is_Qualified_for_DSIntern
+    use QualifiedForJob('Data Science Intern')
+    when
+        qb.QualifiedForTech(DS,$y)
+        check $y < 2
+        qb.tech_cert(DS, $_any)
+    
+    
+
+is_Qualified_for_DSJunior
+    use QualifiedForJob('Data Science Junior')
+    when
+        qb.QualifiedForTech(DS,$y)
+        check $y >= 2
+        qb.QualifiedForTech(DS,$ys)
+        check $ys < 5
+        qb.tech_cert(DS, $_any)
+    
+    
+
+is_Qualified_for_DSSenior
+    use QualifiedForJob('Data Science Senior')
+    when
+        qb.QualifiedForTech(DS,$y)
+        check $y >= 5
+        qb.tech_cert(DS, $_any)
+    
+    
+is_Qualified_for_ITIntern
+    use QualifiedForJob('Information Technology Intern')
+    when
+        qb.QualifiedForTech(IT,$y)
+        check $y < 2
+        qb.tech_cert(IT, $_any)
+    
+    
+
+is_Qualified_for_ITJunior
+    use QualifiedForJob('Information Technology Junior')
+    when
+        qb.QualifiedForTech(IT,$y)
+        check $y >= 2
+        qb.QualifiedForTech(IT,$ys)
+        check $ys < 5
+        qb.tech_cert(IT, $_any)
+    
+
+is_Qualified_for_ITSenior
+    use QualifiedForJob('Information Technology Senior')
+    when
+        qb.QualifiedForTech(IT,$y)
+        check $y >= 5
+        qb.tech_cert(IT, $_any)
+    
+
+is_Qualified_for_CSIntern
+    use QualifiedForJob('Cyber Security Intern')
+    when
+        qb.QualifiedForTech(CS,$y)
+        check $y <2 
+        qb.tech_cert(CS, $_any)
+    
+
+is_Qualified_for_CSJunior
+    use QualifiedForJob('Cyber Security Junior')
+    when
+        qb.QualifiedForTech(CS,$y)
+        check $y >=2 
+        qb.QualifiedForTech(CS,$ys)
+        check $ys < 5
+        qb.tech_cert(CS, $_any)
+    
+
+is_Qualified_for_CSSenior
+    use QualifiedForJob('Cyber Security Senior')
+    when
+       qb.QualifiedForTech(CS,$y)
+       check $y >= 5
+       qb.tech_cert(CS, $_any)
+    
+
+is_Qualified_for_Security
+    use  QualifiedForJob('Security')
+    when
+        qb.gender(male)
+    
+        
+is_Qualified_for_Service
+    use QualifiedForJob('Service')
+    when
+        qb.gender(female)
+    
+
+is_Qualified_for_receptionist
+    use QualifiedForJob('Receptionist')
+    when
+        qb.non_tech_cert(Languages, $_any)
+
+
+
+is_Qualified_For_Business
+    use QualifiedForBuisness($field,$years)
+    when
+        qb.business_degree($_any)
+        qb.business_experience($field,$years)
+    
+is_Qualified_For_Business_SL
+    use QualifiedForBuisness($field, $eyears )
+    when
+        qb.no_degree()
+        qb.business_cert($_any, $_any)
+        qb.business_experience($field, $years)
+        check $years > 2
+        $eyears = $years -2 
+    
+
+is_Qualified_for_Sales
+    use QualifiedForJob('Sales')
+    when
+        qb.QualifiedForBuisness(Sales,$_any)
+    
+
+is_Qualified_For_Accounting
+    use QualifiedForJob('Accountant')
+    when
+        qb.QualifiedForBuisness(Accounting,$_any)
+    

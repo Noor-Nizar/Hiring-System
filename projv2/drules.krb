@@ -1,0 +1,19 @@
+test
+    foreach
+        facts.tech_degrees('CS')
+    assert
+        facts.CSIntern('T')
+
+somerule
+    foreach
+        facts.tech_cert('CS', 'Certified Ethical Hacker')
+    assert
+        facts.Qualified('T')
+
+rule
+    foreach
+        facts.CSIntern('T')
+        facts.Qualified('T')
+    assert
+        facts.final('T')
+    

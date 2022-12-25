@@ -1,7 +1,0 @@
-tech_degree('CS')
-tech_experience('CS',3)
-tech_cert('CS', 'Certified Ethical Hacker')
-gender(female)              
-business_degree('boodz')
-business_experience('Accounting',2)
-business_experience('Sales',2)

@@ -1,0 +1,192 @@
+is_no_degree
+    foreach
+        facts.tech_degree($_any)
+        facts.non_tech_degree($_any)
+    assert
+        facts.no_degree(T)
+    
+is_Qualified_For_Tech_SL
+    foreach
+        facts.no_degree()
+        facts.tech_cert($_any, $_any)
+        facts.tech_experience($field, $years)
+        check $years > 2
+        $eyears = years-2
+    assert 
+        facts.QualifiedForTech($field, $eyears)
+    
+    
+is_Qualified_For_Tech
+    foreach
+        facts.tech_degree($_any)
+        facts.tech_experience($field,$years)
+    assert 
+        facts.QualifiedForTech($field,$years)
+    
+
+is_Qualified_for_SEIntern
+    foreach
+        facts.QualifiedForTech(SE,$y)
+        check $y < 2
+        facts.tech_cert(SE, $_any)
+    assert 
+        facts.QualifiedForJob('Software Engineer Intern')
+    
+is_Qualified_For_SEJunior
+    foreach
+        facts.QualifiedForTech(SE,$y )
+        check $y >= 2
+        facts.QualifiedForTech(SE,$ys )
+        check $ys < 5
+        facts.tech_cert(SE, $_any)
+    assert 
+        facts.QualifiedForJob('Software Engineer Junior')
+    
+
+is_Qualified_for_SESenior
+    foreach
+        facts.QualifiedForTech(SE,$y)
+        check $y >= 5
+        facts.tech_cert(SE, $_any)
+    assert 
+        facts.QualifiedForJob('Software Engineer Senior')
+       
+
+is_Qualified_for_DSIntern
+    foreach
+        facts.QualifiedForTech(DS,$y)
+        check $y < 2
+        facts.tech_cert(DS, $_any)
+    assert 
+        facts.QualifiedForJob('Data Science Intern')
+    
+
+is_Qualified_for_DSJunior
+    foreach
+        facts.QualifiedForTech(DS,$y)
+        check $y >= 2
+        facts.QualifiedForTech(DS,$ys)
+        check $ys < 5
+        facts.tech_cert(DS, $_any)
+    assert 
+        facts.QualifiedForJob('Data Science Junior')
+    
+
+is_Qualified_for_DSSenior
+    foreach
+        facts.QualifiedForTech(DS,$y)
+        check $y >= 5
+        facts.tech_cert(DS, $_any)
+    assert 
+        facts.QualifiedForJob('Data Science Senior')
+    
+is_Qualified_for_ITIntern
+    foreach
+        facts.QualifiedForTech(IT,$y)
+        check $y < 2
+        facts.tech_cert(IT, $_any)
+    assert 
+        facts.QualifiedForJob('Information Technology Intern')
+    
+
+is_Qualified_for_ITJunior
+    foreach
+        facts.QualifiedForTech(IT,$y)
+        check $y >= 2
+        facts.QualifiedForTech(IT,$ys)
+        check $ys < 5
+        facts.tech_cert(IT, $_any)
+    assert 
+        facts.QualifiedForJob('Information Technology Junior')
+    
+
+is_Qualified_for_ITSenior
+    foreach
+        facts.QualifiedForTech(IT,$y)
+        check $y >= 5
+        facts.tech_cert(IT, $_any)
+    assert 
+        facts.QualifiedForJob('Information Technology Senior')
+    
+
+is_Qualified_for_CSIntern
+    foreach
+        facts.QualifiedForTech(CS,$y)
+        check $y <2 
+        facts.tech_cert(CS, $_any)
+    assert
+        facts.QualifiedForJob('Cyber Security Intern')
+    
+
+is_Qualified_for_CSJunior
+    foreach
+        facts.QualifiedForTech(CS,$y)
+        check $y >=2 
+        facts.QualifiedForTech(CS,$ys)
+        check $ys < 5
+        facts.tech_cert(CS, $_any)
+    assert
+        facts.QualifiedForJob('Cyber Security Junior')
+    
+
+is_Qualified_for_CSSenior
+    foreach
+       facts.QualifiedForTech(CS,$y)
+       check $y >= 5
+       facts.tech_cert(CS, $_any)
+    assert 
+       facts.QualifiedForJob('Cyber Security Senior')
+    
+
+is_Qualified_for_Security
+    foreach
+        facts.gender(male)
+    assert  
+        facts.QualifiedForJob('Security')
+    
+        
+is_Qualified_for_Service
+    foreach
+        facts.gender(female)
+    assert 
+        facts.QualifiedForJob('Service')
+    
+
+is_Qualified_for_receptionist
+    foreach
+        facts.non_tech_cert(Languages, $_any)
+    assert
+        facts.QualifiedForJob('Receptionist')
+
+
+
+is_Qualified_For_Business
+    foreach
+        facts.business_degree($_any)
+        facts.business_experience($field,$years)
+    assert
+        facts.QualifiedForBuisness($field,$years)
+    
+is_Qualified_For_Business_SL
+    foreach
+        facts.no_degree()
+        facts.business_cert($_any, $_any)
+        facts.business_experience($field, $years)
+        check $years > 2
+        $eyears = $years -2 
+    assert 
+        facts.QualifiedForBuisness($field, $eyears )
+    
+
+is_Qualified_for_Sales
+    foreach
+        facts.QualifiedForBuisness(Sales,$_any)
+    assert 
+        facts.QualifiedForJob('Sales')
+    
+
+is_Qualified_For_Accounting
+    foreach
+        facts.QualifiedForBuisness(Accounting,$_any)
+    assert 
+        facts.QualifiedForJob('Accountant')

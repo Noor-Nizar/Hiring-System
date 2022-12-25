@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
-import driver as dr 
+import os
+import shutil
 
 tech_Degrees = ['Computer Science','Computer Engineering','Information Technology','Information Systems','Software Engineering','Data Science','Data Analytics','Cybersecurity','Information Security','Artificial Intelligence','Machine Learning']
 non_tech_Degrees = ['Business','Economics']
@@ -36,11 +37,13 @@ layout_l = [
             [sg.Frame('',[[]], key='-Work-')],
             [sg.Button('Ok', key='Submit'), sg.Button('Cancel')]
         ]
+
 layout_r = [
-    [name('You are qualified for the following jobs:')],
-    [sg.Frame('',[[]], key='-Jobs-')]
+    [sg.Text('You Are Qualified For THe Following Jobs', size=(50,1), pad=(50,10), font='Courier 10')],
+    [sg.Text('', key='-Jobs-', size=(50,10), pad=(50,10), font='Courier 10')]
 ]
-layout = [[sg.Col(layout_l), sg.Col(layout_r)]]
+
+layout = [[sg.Col(layout_l), sg.Col(layout_r, element_justification='t')]]
 def writeToFile(Gender, Degs, Certs, Work):
     with open('facts.kfb', 'a') as f:
         if(Gender[0] == 1):
@@ -72,6 +75,7 @@ window = sg.Window('HR', layout)
 certs = 0
 degs = 0
 work= 0
+elements= 0
 # Event Loop to process "events" and get the "values" of the inputs
 while True:
     event, values = window.read() 
@@ -87,14 +91,28 @@ while True:
         window.extend_layout(window['-Work-'], newWork(work))
         work+=1
     if (event == 'Submit'):
-        window.extend_layout(window['-Jobs-'], [[sg.Text('')]])
         Gender = [values['Male'], values['Female']]
         Degs = [values['-Degree-'+str(i)] for i in range(degs)]
         Certs = [values['-CertField-'+str(i)] + ' ' + values['-CertName-'+str(i)] for i in range(certs)]
         Work = [values['-WorkField-'+str(i)] + ' ' + values['-WorkYears-'+str(i)] for i in range(work)]
         writeToFile(Gender, Degs, Certs, Work)
-        result = dr.run()
+        os.system('python driver.py')
+        with open('results.txt', 'r') as f:
+            result = f.readlines()
+        rstring = ''
         for res in result:
-            window.extend_layout(window['-Jobs-'], [[sg.Text(res)]])
+            rstring += res + '\n'
+
+        # window['-Jobs-'].update(value='')
+        print(rstring)
+        window['-Jobs-'].update(str(rstring))
+        ## removes the content of the facts.kfb file
+        with open('facts.kfb', 'w') as f:
+            f.write('')
+        try:
+            shutil.rmtree('compiled_krb')
+        except FileNotFoundError:
+            pass
+
 
 window.close()

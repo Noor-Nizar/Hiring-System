@@ -7,6 +7,7 @@ from pyke import ask_tty
 # Create a Pyke engine
 
 def run():
+
     engine = knowledge_engine.engine(__file__)
     engine.reset()
     engine.activate('rules')
@@ -21,4 +22,9 @@ def run():
         sys.exit(1)
     print ()
     print ("done")
-    return jobs
+    # write results to file
+    with open('results.txt', 'w') as f:
+        for job in jobs:
+            f.write(job + '\n')
+
+run()

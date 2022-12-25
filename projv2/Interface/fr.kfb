@@ -1,0 +1,32 @@
+equivDegree('SE', 3)
+equivDegree('DS', 4)
+equivDegree('IT', 2)
+equivDegree('CS', 3)
+equivDegree('Sales', 1)
+equivDegree('Accounting', 1)
+
+SErole('Software Engineer Senior', 5)
+SErole('Software Engineer Junior', 2)
+SErole('Software Engineer Intern', 0)
+
+DSrole('Data Scientist Senior', 8)
+DSrole('Data Scientist Junior', 4)
+DSrole('Data Scientist Intern', 0)
+
+ITrole('Information Technology Senior', 8)
+ITrole('Information Technology Junior', 3)
+ITrole('Information Technology Intern', 0)
+
+CSrole('Cyber Security Senior', 10)
+CSrole('Cyber Security Junior', 5)
+CSrole('Cyber Security Intern', 0)
+
+Salesrole('Sales Senior', 6)
+Salesrole('Sales Junior', 2)
+Salesrole('Sales Intern', 0)
+
+Accountingrole('Accounting Senior', 5)
+Accountingrole('Accounting Junior', 2)
+Accountingrole('Accounting Intern', 0)
+
+
